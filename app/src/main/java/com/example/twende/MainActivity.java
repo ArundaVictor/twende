@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 //add a toast pop up above the button
-                Toast.makeText(MainActivity.this, "Welcome", Toast.LENGTH_LONG).show();
+                Toast.makeText(MainActivity.this, "Welcome to Twende", Toast.LENGTH_LONG).show();
             }
         });
     }
