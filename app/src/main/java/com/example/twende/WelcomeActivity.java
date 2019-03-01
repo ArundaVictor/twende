@@ -1,12 +1,14 @@
 package com.example.twende;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import butterknife.BindView;
@@ -16,7 +18,8 @@ public class WelcomeActivity extends AppCompatActivity {
     public static final String TAG = WelcomeActivity.class.getSimpleName();
    @BindView(R.id.eventsButton) Button mEventsButton;
    @BindView(R.id.editText) EditText mEditText;
-
+   @BindView(R.id.textview1) TextView mTextview1;
+    @BindView(R.id.textview2) TextView mTextview2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +38,10 @@ public class WelcomeActivity extends AppCompatActivity {
                 //passing data with intent
                 intent.putExtra("location", location);
                 startActivity(intent);
+                Typeface walkway = Typeface.createFromAsset(getAssets(), "Fonts/Walkway_Black.ttf");
+                mTextview1.setTypeface(walkway);
+                mTextview2.setTypeface(walkway);
+
 
 
 

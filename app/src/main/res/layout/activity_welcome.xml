@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/back"
     tools:context=".WelcomeActivity">
 
     <Button
@@ -13,19 +14,36 @@
         android:id="@+id/eventsButton"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:background="@color/colorAccent"
+        android:background="@color/colorPrimary"
         android:textColor="@color/colorTextIcons" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Welcome to Twende apllication.This application provides with a wide variety of information regarding events asuch their location, ticket prices and many other information."
+        android:id="@+id/textview1"
+        android:textSize="18sp"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Let's begin by entering the location of your choice and view the events set to be happening at that location"
+        android:layout_below="@+id/textview1"
+        android:id="@+id/textview2"
+        android:textSize="18sp"
+        />
+
 
     <EditText
         android:id="@+id/editText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ems="10"
         android:layout_above="@+id/eventsButton"
-        android:layout_centerHorizontal="true"
-        android:layout_alignLeft="@+id/eventsButton"
+        android:layout_centerInParent="true"
+        android:layout_centerVertical="true"
+        android:layout_marginBottom="193dp"
+        android:ems="10"
         android:hint="Enter Location"
         android:inputType="textPersonName"
-        android:text="Name" />
+       />
 
 </RelativeLayout>
