@@ -16,4 +16,16 @@
         android:background="@color/colorAccent"
         android:textColor="@color/colorTextIcons" />
 
+    <EditText
+        android:id="@+id/editText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:layout_above="@+id/eventsButton"
+        android:layout_centerHorizontal="true"
+        android:layout_alignLeft="@+id/eventsButton"
+        android:hint="Enter Location"
+        android:inputType="textPersonName"
+        android:text="Name" />
+
 </RelativeLayout>
