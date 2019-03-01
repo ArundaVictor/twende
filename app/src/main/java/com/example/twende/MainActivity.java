@@ -7,9 +7,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class MainActivity extends AppCompatActivity {
     //welcome button
-    private Button mWelcomeButton;
+    @BindView(R.id.welcomeButton) Button mWelcomeButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         //declaring button
-        mWelcomeButton = (Button) findViewById(R.id.welcomeButton);
+        ButterKnife.bind(this);
 
         //click listener for button
         mWelcomeButton.setOnClickListener(new View.OnClickListener() {

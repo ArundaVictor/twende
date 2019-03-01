@@ -9,17 +9,19 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class WelcomeActivity extends AppCompatActivity {
     public static final String TAG = WelcomeActivity.class.getSimpleName();
-    private Button  mEventsButton;
-    private EditText mEditText;
+   @BindView(R.id.eventsButton) Button mEventsButton;
+   @BindView(R.id.editText) EditText mEditText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
-        mEditText = (EditText) findViewById(R.id.editText);
-        mEventsButton = (Button) findViewById(R.id.eventsButton);
+        ButterKnife.bind(this);
         mEventsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

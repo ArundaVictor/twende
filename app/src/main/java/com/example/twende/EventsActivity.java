@@ -8,9 +8,12 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class EventsActivity extends AppCompatActivity {
-    private ListView mListView;
-    private TextView mTextView;
+   @BindView(R.id.listView) ListView mListView;
+    @BindView(R.id.textView) TextView mTextView;
     private String[] events = new String[] {"Koroga Festival", "Sun Glasses",
             "Blankets and wine", "Ngoma Fest", "JumpOff", "Daylight Insomnia"};
 
@@ -18,8 +21,7 @@ public class EventsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_events);
-        mListView = (ListView) findViewById(R.id.listView);
-        mTextView = (TextView) findViewById(R.id.textView);
+        ButterKnife.bind(this);
 
         //array adapter to display lists
         ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, events);
