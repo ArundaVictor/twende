@@ -29,6 +29,9 @@ public class WelcomeActivity extends AppCompatActivity {
                 Toast.makeText(WelcomeActivity.this, "Success", Toast.LENGTH_LONG).show();
 
                 Intent intent = new Intent(WelcomeActivity.this, EventsActivity.class);
+
+                //passing data with intent
+                intent.putExtra("location", location);
                 startActivity(intent);
 
 
