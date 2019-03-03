@@ -15,7 +15,8 @@ public class EventsActivity extends AppCompatActivity {
    @BindView(R.id.listView) ListView mListView;
     @BindView(R.id.textView) TextView mTextView;
     private String[] events = new String[] {"Koroga Festival", "Sun Glasses",
-            "Blankets and wine", "Ngoma Fest", "JumpOff", "Daylight Insomnia"};
+            "Blankets and wine", "Ngoma Fest", "JumpOff", "Daylight Insomnia", "Safaricom Jazz Festival", "Feastival of love",
+    "Nairobi Tech Week", "Nairobi fashion week", "Safaricom Sevens", "Jameson"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
