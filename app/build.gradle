@@ -19,7 +19,7 @@ android {
 
     //connect eventbrite credentials
     buildTypes.each {
-        it.buildConfigField 'String', 'EventToken', EventToken
+        it.buildConfigField 'String', 'EVENT_TOKEN', EventToken
     }
 }
 
