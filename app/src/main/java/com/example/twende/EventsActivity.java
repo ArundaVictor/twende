@@ -11,6 +11,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -22,6 +23,11 @@ public class EventsActivity extends AppCompatActivity {
     public static final String TAG = EventsActivity.class.getSimpleName();
    @BindView(R.id.listView) ListView mListView;
     @BindView(R.id.textView) TextView mTextView;
+
+    //array for all events
+    public ArrayList <Event> mEvents = new ArrayList<>();
+
+
     private String[] events = new String[] {"Koroga Festival", "Sun Glasses",
             "Blankets and wine", "Ngoma Fest", "JumpOff", "Daylight Insomnia", "Safaricom Jazz Festival", "Feastival of love",
     "Nairobi Tech Week", "Nairobi fashion week", "Safaricom Sevens", "Jameson"};
@@ -65,9 +71,15 @@ public class EventsActivity extends AppCompatActivity {
             //triggered when request is successful
             @Override
             public void onResponse(Call call, Response response) throws IOException {
+
                 try {
                     String jsonData = response.body().string();
                     Log.v(TAG, jsonData);
+                    if (response.isSuccessful()){
+                        Log.v(TAG, jsonData);
+
+                        mEvents = eventBriteService.processResults(response);
+                    }
                 } catch (IOException e){
                     e.printStackTrace();
                 }
