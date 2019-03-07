@@ -1,4 +1,7 @@
-package com.example.twende;
+package com.example.twende.services;
+
+import com.example.twende.Constants;
+import com.example.twende.models.Event;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -56,24 +59,9 @@ public class EventBriteService {
                     String url = eventJSON.getString("url");
                     String currency = eventJSON.getString("currency");
                     String status = eventJSON.getString("status");
+//                    String timezone = eventJSON.getString("timezone");
 
-                    ArrayList<String> start = new ArrayList<>();
-                    JSONArray startJSON = eventJSON.getJSONArray("start");
-
-                    for (int y = 0; y < startJSON.length(); i++) {
-                        start.add(startJSON.getJSONObject(y).getString("timezone"));
-
-                    }
-
-                    ArrayList<String> end = new ArrayList<>();
-                    JSONArray endJSON = eventJSON.getJSONArray("end");
-
-                    for (int y = 0; y < endJSON.length(); i++) {
-                        end.add(startJSON.getJSONObject(y).getString("timezone"));
-
-                    }
-
-                    Event event = new Event(name, description, url, status, currency, start, end);
+                    Event event = new Event(name, description, url, status, currency);
                     events.add(event);
 
                 }

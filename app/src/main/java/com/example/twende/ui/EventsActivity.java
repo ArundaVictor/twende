@@ -1,14 +1,16 @@
-package com.example.twende;
+package com.example.twende.ui;
 
 import android.content.Intent;
-import android.nfc.Tag;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.example.twende.services.EventBriteService;
+import com.example.twende.R;
+import com.example.twende.models.Event;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -28,10 +30,6 @@ public class EventsActivity extends AppCompatActivity {
     public ArrayList <Event> mEvents = new ArrayList<>();
 
 
-    private String[] events = new String[] {"Koroga Festival", "Sun Glasses",
-            "Blankets and wine", "Ngoma Fest", "JumpOff", "Daylight Insomnia", "Safaricom Jazz Festival", "Feastival of love",
-    "Nairobi Tech Week", "Nairobi fashion week", "Safaricom Sevens", "Jameson"};
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,9 +38,7 @@ public class EventsActivity extends AppCompatActivity {
 
 
 
-        //array adapter to display lists
-        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, events);
-        mListView.setAdapter(adapter);
+
 
         //gathering data from intent extras
         Intent intent = getIntent();
@@ -72,18 +68,42 @@ public class EventsActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call call, Response response) throws IOException {
 
-                try {
-                    String jsonData = response.body().string();
-                    Log.v(TAG, jsonData);
-                    if (response.isSuccessful()){
-                        Log.v(TAG, jsonData);
+                mEvents = eventBriteService.processResults(response);
 
-                        mEvents = eventBriteService.processResults(response);
+                //add runnable to share code between interfaces
+                EventsActivity.this.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        //to display list of events for the user
+                        String[] eventNames = new String[mEvents.size()];
+                        for (int i = 0; i<eventNames.length; i++){
+                            eventNames[i] = mEvents.get(i).getName();
+                        }
+
+                        //array adapter to display the list of events to user
+                        ArrayAdapter adapter = new ArrayAdapter(EventsActivity.this, android.R.layout.simple_list_item_1,eventNames);
+                        mListView.setAdapter(adapter);
+
+
+                        for (Event event : mEvents){
+
+                            Log.d(TAG, "Name" + event.getName());
+                            Log.d(TAG, "Description" + event.getDescription());
+                            Log.d(TAG, "Status" + event.getmStatus());
+                            Log.d(TAG, "Url" + event.getUrl());
+                            Log.d(TAG, "Currency" + event.getCurrency());
+                        }
+
+
+
+
+
+
                     }
-                } catch (IOException e){
-                    e.printStackTrace();
-                }
+                });
 
+//
             }
         });
     }

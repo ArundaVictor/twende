@@ -1,4 +1,4 @@
-package com.example.twende;
+package com.example.twende.models;
 
 import java.util.ArrayList;
 
@@ -9,18 +9,17 @@ public class Event {
     private String mUrl;
     private String mStatus;
     private String mCurrency;
-    private ArrayList <String> mStart;
-    private ArrayList <String> mEnd;
+//    private String mTimeZone;
 
-    public Event (String name, String description, String url, String status, String currency, ArrayList <String> start, ArrayList <String> end){
+    public Event (String name, String description, String url, String status, String currency ){
 
         this.mName = name;
         this.mDescription = description;
         this.mUrl = url;
         this.mStatus = status;
         this.mCurrency = currency;
-        this.mStart = start;
-        this.mEnd = end;
+//        this.mTimeZone = timezone;
+
     }
 
     public String getName() {
@@ -43,11 +42,6 @@ public class Event {
         return mCurrency;
     }
 
-    public ArrayList<String> getStart() {
-        return mStart;
-    }
+//    public String getTimeZone() { return mTimeZone; }
 
-    public ArrayList<String> getEnd() {
-        return mEnd;
-    }
 }
