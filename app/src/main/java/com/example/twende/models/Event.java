@@ -34,7 +34,7 @@ public class Event {
         return mUrl;
     }
 
-    public String getmStatus() {
+    public String getStatus() {
         return mStatus;
     }
 

@@ -90,7 +90,7 @@ public class EventsActivity extends AppCompatActivity {
 
                             Log.d(TAG, "Name" + event.getName());
                             Log.d(TAG, "Description" + event.getDescription());
-                            Log.d(TAG, "Status" + event.getmStatus());
+                            Log.d(TAG, "Status" + event.getStatus());
                             Log.d(TAG, "Url" + event.getUrl());
                             Log.d(TAG, "Currency" + event.getCurrency());
                         }
