@@ -3,11 +3,10 @@ package com.example.twende.ui;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-import android.widget.TextView;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 
+import com.example.twende.adapters.EventListAdapter;
 import com.example.twende.services.EventBriteService;
 import com.example.twende.R;
 import com.example.twende.models.Event;
@@ -21,13 +20,13 @@ import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
 
-public class EventsActivity extends AppCompatActivity {
-    public static final String TAG = EventsActivity.class.getSimpleName();
-   @BindView(R.id.listView) ListView mListView;
-    @BindView(R.id.textView) TextView mTextView;
+public class EventListActivity extends AppCompatActivity {
+    public static final String TAG = EventListActivity.class.getSimpleName();
+   @BindView(R.id.recyclerView) RecyclerView mRecyclerView;
+    private EventListAdapter mAdapter;
 
     //array for all events
-    public ArrayList <Event> mEvents = new ArrayList<>();
+    public ArrayList <Event> events = new ArrayList<>();
 
 
     @Override
@@ -43,7 +42,6 @@ public class EventsActivity extends AppCompatActivity {
         //gathering data from intent extras
         Intent intent = getIntent();
         String location = intent.getStringExtra("location");
-        mTextView.setText("Here are all the events happening in " + location);
 
         getEvents(location);
 
@@ -68,32 +66,18 @@ public class EventsActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call call, Response response) throws IOException {
 
-                mEvents = eventBriteService.processResults(response);
+                events = eventBriteService.processResults(response);
 
                 //add runnable to share code between interfaces
-                EventsActivity.this.runOnUiThread(new Runnable() {
+                EventListActivity.this.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
 
-                        //to display list of events for the user
-                        String[] eventNames = new String[mEvents.size()];
-                        for (int i = 0; i<eventNames.length; i++){
-                            eventNames[i] = mEvents.get(i).getName();
-                        }
-
-                        //array adapter to display the list of events to user
-                        ArrayAdapter adapter = new ArrayAdapter(EventsActivity.this, android.R.layout.simple_list_item_1,eventNames);
-                        mListView.setAdapter(adapter);
-
-
-                        for (Event event : mEvents){
-
-                            Log.d(TAG, "Name" + event.getName());
-                            Log.d(TAG, "Description" + event.getDescription());
-                            Log.d(TAG, "Status" + event.getStatus());
-                            Log.d(TAG, "Url" + event.getUrl());
-                            Log.d(TAG, "Currency" + event.getCurrency());
-                        }
+                        mAdapter = new EventListAdapter(getApplicationContext(), events);
+                        mRecyclerView.setAdapter(mAdapter);
+                        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(EventListActivity.this);
+                        mRecyclerView.setLayoutManager(layoutManager);
+                        mRecyclerView.setHasFixedSize(true);
 
 
 

@@ -54,14 +54,13 @@ public class EventBriteService {
 
                 for (int i = 0; i < activityJSON.length(); i++) {
                     JSONObject eventJSON = activityJSON.getJSONObject(i);
-                    String name = eventJSON.getString("name");
                     String description = eventJSON.getString("description");
                     String url = eventJSON.getString("url");
                     String currency = eventJSON.getString("currency");
                     String status = eventJSON.getString("status");
-//                    String timezone = eventJSON.getString("timezone");
+                    String name = eventJSON.getString("name");
 
-                    Event event = new Event(name, description, url, status, currency);
+                    Event event = new Event(name,description, url, status, currency);
                     events.add(event);
 
                 }

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Event {
 
-    private String mName;
+  private String mName;
     private String mDescription;
     private String mUrl;
     private String mStatus;
@@ -22,9 +22,7 @@ public class Event {
 
     }
 
-    public String getName() {
-        return mName;
-    }
+   public String getName(){return mName;}
 
     public String getDescription() {
         return mDescription;
