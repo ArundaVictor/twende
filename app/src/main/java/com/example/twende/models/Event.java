@@ -1,7 +1,10 @@
 package com.example.twende.models;
 
+import org.parceler.Parcel;
+
 import java.util.ArrayList;
 
+@Parcel
 public class Event {
 
   private String mName;
