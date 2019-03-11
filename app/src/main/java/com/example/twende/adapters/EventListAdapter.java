@@ -1,6 +1,7 @@
 package com.example.twende.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,9 @@ import android.widget.TextView;
 
 import com.example.twende.R;
 import com.example.twende.models.Event;
+import com.example.twende.ui.EventDetailActivity;
+
+import org.parceler.Parcels;
 
 import java.util.ArrayList;
 
@@ -43,7 +47,7 @@ public class EventListAdapter extends RecyclerView.Adapter<EventListAdapter.Even
         return mEvents.size();
     }
 
-    public class EventViewHolder extends RecyclerView.ViewHolder {
+    public class EventViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         @BindView(R.id.eventImageView)
         ImageView mEventImageView;
         @BindView(R.id.eventNameTextView)
@@ -59,6 +63,16 @@ public class EventListAdapter extends RecyclerView.Adapter<EventListAdapter.Even
             super(itemView);
             ButterKnife.bind(this, itemView);
             mContext = itemView.getContext();
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v){
+            int itemPosition = getLayoutPosition();
+            Intent intent = new Intent(mContext, EventDetailActivity.class);
+            intent.putExtra("position", itemPosition);
+            intent.putExtra("restaurants", Parcels.wrap(mEvents));
+            mContext.startActivity(intent);
         }
 
         public void bindEvent(Event event) {
