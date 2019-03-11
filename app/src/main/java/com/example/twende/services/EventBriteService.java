@@ -58,7 +58,7 @@ public class EventBriteService {
                     String url = eventJSON.getString("url");
                     String currency = eventJSON.getString("currency");
                     String status = eventJSON.getString("status");
-                    String name = eventJSON.getString("name");
+                    String name = eventJSON.getJSONObject("name").getString("text");
 
                     Event event = new Event(name,description, url, status, currency);
                     events.add(event);

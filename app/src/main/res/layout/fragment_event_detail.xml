@@ -38,13 +38,16 @@
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/currencyTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="US Dollars"
-                android:id="@+id/currencyTextView"
                 android:layout_alignTop="@+id/eventNameTextView"
-                android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="27dp"
+                android:layout_marginEnd="18dp"
+                android:layout_marginRight="18dp"
+                android:text="US Dollars"
                 android:textColor="@color/colorAccent"
                 android:textStyle="bold" />
 
@@ -79,7 +82,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Check out their website"
+                    android:text="Check out their website for more information."
                     android:id="@+id/websiteTextView"
                     android:drawableLeft="@mipmap/baseline_exit_to_app_black_18dp"
                     android:drawablePadding="4dp"

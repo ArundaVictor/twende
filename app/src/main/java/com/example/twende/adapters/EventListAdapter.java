@@ -71,7 +71,7 @@ public class EventListAdapter extends RecyclerView.Adapter<EventListAdapter.Even
             int itemPosition = getLayoutPosition();
             Intent intent = new Intent(mContext, EventDetailActivity.class);
             intent.putExtra("position", itemPosition);
-            intent.putExtra("restaurants", Parcels.wrap(mEvents));
+            intent.putExtra("events", Parcels.wrap(mEvents));
             mContext.startActivity(intent);
         }
 

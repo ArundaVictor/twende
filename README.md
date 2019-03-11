@@ -1,6 +1,6 @@
 # TWENDE
 
-This is a mobile application where users can enter a location and view all the events happening at the location.
+This is a mobile application where users can enter a location and view all the events happening at the location using the eventbrite API..
 
 #### By **Arunda Victor Oyugi**
 

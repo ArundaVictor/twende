@@ -1,6 +1,8 @@
 package com.example.twende.ui;
 
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcel;
 import android.support.v4.app.Fragment;
@@ -21,7 +23,7 @@ import butterknife.ButterKnife;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class EventDetailFragment extends Fragment {
+public class EventDetailFragment extends Fragment implements View.OnClickListener {
     @BindView(R.id.eventImageView) ImageView mImageLabel;
     @BindView(R.id.eventNameTextView) TextView mNameLabel;
     @BindView(R.id.statusTextView) TextView mStatusLabel;
@@ -61,8 +63,22 @@ public class EventDetailFragment extends Fragment {
         mStatusLabel.setText(mEvent.getStatus());
         mCurrencyLabel.setText(mEvent.getCurrency());
 
+        mWebsiteLabel.setOnClickListener(this);
+
 
         return view;
     }
 
+    @Override
+    public void onClick(View v) {
+        if (v == mWebsiteLabel) {
+            Intent webIntent = new Intent(Intent.ACTION_VIEW,
+                    Uri.parse(mEvent.getUrl()));
+            startActivity(webIntent);
+        }
+
+    //implicit intent
+
+
+}
 }

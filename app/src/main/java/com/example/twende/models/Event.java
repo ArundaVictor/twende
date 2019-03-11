@@ -14,6 +14,8 @@ public class Event {
     private String mCurrency;
 //    private String mTimeZone;
 
+    public Event() {}
+
     public Event (String name, String description, String url, String status, String currency ){
 
         this.mName = name;
