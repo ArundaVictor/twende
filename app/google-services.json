@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "624303741984-5qjboh89m5j5ttll37jqupj7bup37goc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.twende",
+            "certificate_hash": "b02f70ea6d7de5fd9dd93be9d4d01e9d8ae2ac16"
+          }
+        },
+        {
           "client_id": "624303741984-b1a0q8ai5ckguum96vhonfksn4l4oj0t.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -29,8 +37,13 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "624303741984-b1a0q8ai5ckguum96vhonfksn4l4oj0t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
           "status": 2
