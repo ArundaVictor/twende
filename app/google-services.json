@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "624303741984",
+    "firebase_url": "https://twende-ac7e9.firebaseio.com",
+    "project_id": "twende-ac7e9",
+    "storage_bucket": "twende-ac7e9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:624303741984:android:f0ae817d166070e1",
+        "android_client_info": {
+          "package_name": "com.example.twende"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "624303741984-b1a0q8ai5ckguum96vhonfksn4l4oj0t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB-ZQgs84lcNm0CrGbWVfUpNiO5yXUgv84"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
