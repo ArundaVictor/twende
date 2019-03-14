@@ -9,11 +9,16 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.twende.Constants;
 import com.example.twende.R;
 import com.example.twende.models.Event;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import org.parceler.Parcels;
 
@@ -29,7 +34,7 @@ public class EventDetailFragment extends Fragment implements View.OnClickListene
     @BindView(R.id.statusTextView) TextView mStatusLabel;
     @BindView(R.id.currencyTextView) TextView mCurrencyLabel;
     @BindView(R.id.websiteTextView) TextView mWebsiteLabel;
-    @BindView(R.id.saveEventButton) TextView mSaveRestaurantButton;
+    @BindView(R.id.saveEventButton) Button mSaveRestaurantButton;
 
 
     private Event mEvent;
@@ -65,6 +70,8 @@ public class EventDetailFragment extends Fragment implements View.OnClickListene
 
         mWebsiteLabel.setOnClickListener(this);
 
+        mSaveRestaurantButton.setOnClickListener(this);
+
 
         return view;
     }
@@ -75,6 +82,14 @@ public class EventDetailFragment extends Fragment implements View.OnClickListene
             Intent webIntent = new Intent(Intent.ACTION_VIEW,
                     Uri.parse(mEvent.getUrl()));
             startActivity(webIntent);
+        }
+
+        if (v == mSaveRestaurantButton) {
+            DatabaseReference eventRef = FirebaseDatabase
+                    .getInstance()
+                    .getReference(Constants.FIREBASE_CHILD_EVENTS);
+            eventRef.push().setValue(mEvent);
+            Toast.makeText(getContext(), "Saved", Toast.LENGTH_SHORT).show();
         }
 
     //implicit intent
