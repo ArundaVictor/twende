@@ -1,7 +1,9 @@
 package com.example.twende.ui;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,43 +13,50 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.twende.Constants;
 import com.example.twende.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class WelcomeActivity extends AppCompatActivity {
-    public static final String TAG = WelcomeActivity.class.getSimpleName();
-   @BindView(R.id.eventsButton) Button mEventsButton;
-   @BindView(R.id.editText) EditText mEditText;
-   @BindView(R.id.textview1) TextView mTextview1;
-    @BindView(R.id.textview2) TextView mTextview2;
+public class WelcomeActivity extends AppCompatActivity implements View.OnClickListener {
+
+    private SharedPreferences mSharedPreferences;
+    private SharedPreferences.Editor mEditor;
+
+    @BindView(R.id.editText) EditText mLocationEditText;
+    @BindView(R.id.eventsButton) Button mEventsButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_welcome);
+        setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        mEventsButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-                String location = mEditText.getText().toString();
-                Log.d(TAG, location);
-                Toast.makeText(WelcomeActivity.this, "Success", Toast.LENGTH_LONG).show();
+        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        mEditor = mSharedPreferences.edit();
 
-                Intent intent = new Intent(WelcomeActivity.this, EventListActivity.class);
+        mEventsButton.setOnClickListener(this);
+    }
 
-                //passing data with intent
-                intent.putExtra("location", location);
-                startActivity(intent);
-                Typeface walkway = Typeface.createFromAsset(getAssets(), "Fonts/Walkway_Black.ttf");
-                mTextview1.setTypeface(walkway);
-                mTextview2.setTypeface(walkway);
-
-
-
-
+    @Override
+    public void onClick(View v) {
+        if (v == mEventsButton) {
+            String location = mLocationEditText.getText().toString();
+            if(!(location).equals("")) {
+                addToSharedPreferences(location);
             }
-        });
+            Intent intent = new Intent(WelcomeActivity.this, EventListActivity.class);
+            startActivity(intent);
+        }
+    }
+
+    private void addToSharedPreferences(String location) {
+        mEditor.putString(Constants.PREFERENCES_LOCATION_KEY, location).apply();
     }
 }
+
+
+
+
+
