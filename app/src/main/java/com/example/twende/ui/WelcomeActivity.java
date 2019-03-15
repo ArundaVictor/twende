@@ -36,6 +36,7 @@ public class WelcomeActivity extends AppCompatActivity implements View.OnClickLi
 
     @BindView(R.id.editText) EditText mLocationEditText;
     @BindView(R.id.eventsButton) Button mEventsButton;
+    @BindView(R.id.savedEventsButton) Button mSavedEventsButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +45,8 @@ public class WelcomeActivity extends AppCompatActivity implements View.OnClickLi
                 .getInstance()
                 .getReference()
                 .child(Constants.FIREBASE_CHILD_SEARCHED_LOCATION);
+
+
 
         mSearchedLocationReferenceListener = mSearchedLocationReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -71,6 +74,7 @@ public class WelcomeActivity extends AppCompatActivity implements View.OnClickLi
         //mEditor = mSharedPreferences.edit();
 
         mEventsButton.setOnClickListener(this);
+        mSavedEventsButton.setOnClickListener(this);
     }
 
     @Override
@@ -88,6 +92,11 @@ public class WelcomeActivity extends AppCompatActivity implements View.OnClickLi
               //  addToSharedPreferences(location);
             //}
             Intent intent = new Intent(WelcomeActivity.this, EventListActivity.class);
+            startActivity(intent);
+        }
+
+        if (v == mSavedEventsButton) {
+            Intent intent = new Intent(WelcomeActivity.this, SavedEventListActivity.class);
             startActivity(intent);
         }
     }

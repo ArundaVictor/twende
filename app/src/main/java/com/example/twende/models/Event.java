@@ -7,42 +7,42 @@ import java.util.ArrayList;
 @Parcel
 public class Event {
 
-  private String Name;
-    private String Description;
-    private String Url;
-    private String Status;
-    private String Currency;
+  private String name;
+    private String description;
+    private String url;
+    private String status;
+    private String currency;
 //    private String mTimeZone;
 
     public Event() {}
 
     public Event (String name, String description, String url, String status, String currency ){
 
-        this.Name = name;
-        this.Description = description;
-        this.Url = url;
-        this.Status = status;
-        this.Currency = currency;
+        this.name = name;
+        this.description = description;
+        this.url = url;
+        this.status = status;
+        this.currency = currency;
 //        this.mTimeZone = timezone;
 
     }
 
-   public String getName(){return Name;}
+   public String getName(){return name;}
 
     public String getDescription() {
-        return Description;
+        return description;
     }
 
     public String getUrl() {
-        return Url;
+        return url;
     }
 
     public String getStatus() {
-        return Status;
+        return status;
     }
 
     public String getCurrency() {
-        return Currency;
+        return currency;
     }
 
 //    public String getTimeZone() { return mTimeZone; }

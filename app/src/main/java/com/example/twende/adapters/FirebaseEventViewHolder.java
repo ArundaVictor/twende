@@ -34,7 +34,6 @@ public class FirebaseEventViewHolder extends RecyclerView.ViewHolder implements 
     }
 
     public void bindEvent(Event event) {
-        ImageView eventImageView = (ImageView) mView.findViewById(R.id.eventImageView);
         TextView nameTextView = (TextView) mView.findViewById(R.id.eventNameTextView);
         TextView currencyTextView = (TextView) mView.findViewById(R.id.currencyTextView);
         TextView statusTextView = (TextView) mView.findViewById(R.id.statusTextView);
