@@ -27,14 +27,11 @@ import butterknife.ButterKnife;
 
 public class WelcomeActivity extends AppCompatActivity implements View.OnClickListener {
 
-    //private SharedPreferences mSharedPreferences;
-    //private SharedPreferences.Editor mEditor;
 
     private DatabaseReference mSearchedLocationReference;
     private ValueEventListener  mSearchedLocationReferenceListener;
 
 
-    @BindView(R.id.editText) EditText mLocationEditText;
     @BindView(R.id.eventsButton) Button mEventsButton;
     @BindView(R.id.savedEventsButton) Button mSavedEventsButton;
 
@@ -70,9 +67,6 @@ public class WelcomeActivity extends AppCompatActivity implements View.OnClickLi
         setContentView(R.layout.activity_welcome);
         ButterKnife.bind(this);
 
-        //mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        //mEditor = mSharedPreferences.edit();
-
         mEventsButton.setOnClickListener(this);
         mSavedEventsButton.setOnClickListener(this);
     }
@@ -86,11 +80,7 @@ public class WelcomeActivity extends AppCompatActivity implements View.OnClickLi
     @Override
     public void onClick(View v) {
         if (v == mEventsButton) {
-            String location = mLocationEditText.getText().toString();
-            saveLocationToFirebase(location);
-            //if(!(location).equals("")) {
-              //  addToSharedPreferences(location);
-            //}
+
             Intent intent = new Intent(WelcomeActivity.this, EventListActivity.class);
             startActivity(intent);
         }
@@ -101,15 +91,6 @@ public class WelcomeActivity extends AppCompatActivity implements View.OnClickLi
         }
     }
 
-    public void saveLocationToFirebase(String location) {
-        mSearchedLocationReference.push().setValue(location);
-    }
-
-
-
-    //private void addToSharedPreferences(String location) {
-      //  mEditor.putString(Constants.PREFERENCES_LOCATION_KEY, location).apply();
-    //}
 }
 
 
