@@ -13,6 +13,7 @@ public class Event {
     private String status;
     private String currency;
 //    private String mTimeZone;
+private String pushId;
 
     public Event() {}
 
@@ -46,5 +47,13 @@ public class Event {
     }
 
 //    public String getTimeZone() { return mTimeZone; }
+
+    public String getPushId() {
+        return pushId;
+    }
+
+    public void setPushId(String pushId){
+        this.pushId = pushId;
+    }
 
 }
