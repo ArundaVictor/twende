@@ -18,7 +18,11 @@ This is a mobile application where users can enter a location and view all the e
 |#User inputs   |  #Example outputs |         
 |---------------|-------------------|
 |When it receives:               | It should return:                  |
-| User enters location           | A list of events to take place at that location is displayed|
+|User creates account	| User is Authenticated and logs in to the application |
+|User enters location	|A list of events to take place at that location is displayed |
+|User saves a particular event(s)|	Event(s) is successfully saved|
+|User chooses to view saved events	|A list of the user's saved events is displayed|
+|User logouts of the application|	User is successfully logged out|
 
 
 
