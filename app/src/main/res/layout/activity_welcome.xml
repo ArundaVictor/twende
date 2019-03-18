@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/back"
+    android:background="@color/colorNew"
     tools:context=".ui.WelcomeActivity">
 
     <Button
@@ -25,6 +25,7 @@
         android:text="Welcome to Twende apllication.This application provides with a wide variety of information regarding events asuch their location, ticket prices and many other information."
         android:id="@+id/textview1"
         android:textSize="18sp"
+        android:textColor="@color/colorWhite"
         />
     <TextView
         android:layout_width="match_parent"
@@ -33,6 +34,7 @@
         android:layout_below="@+id/textview1"
         android:id="@+id/textview2"
         android:textSize="18sp"
+        android:textColor="@color/colorWhite"
         />
 
     <Button
