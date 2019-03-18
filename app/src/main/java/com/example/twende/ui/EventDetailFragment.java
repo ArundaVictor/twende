@@ -17,6 +17,8 @@ import android.widget.Toast;
 import com.example.twende.Constants;
 import com.example.twende.R;
 import com.example.twende.models.Event;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -85,10 +87,20 @@ public class EventDetailFragment extends Fragment implements View.OnClickListene
         }
 
         if (v == mSaveRestaurantButton) {
+
+            //save restaurant specific to user
+            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+            String uid = user.getUid();
             DatabaseReference eventRef = FirebaseDatabase
                     .getInstance()
-                    .getReference(Constants.FIREBASE_CHILD_EVENTS);
-            eventRef.push().setValue(mEvent);
+                    .getReference(Constants.FIREBASE_CHILD_EVENTS)
+                    .child(uid);
+
+                    DatabaseReference pushref = eventRef.push();
+                    String pushId = pushref.getKey();
+                    mEvent.setPushId(pushId);
+                    pushref.setValue(mEvent);
+
             Toast.makeText(getContext(), "Saved", Toast.LENGTH_SHORT).show();
         }
 

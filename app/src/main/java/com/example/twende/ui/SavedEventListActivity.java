@@ -15,6 +15,8 @@ import com.example.twende.adapters.FirebaseEventViewHolder;
 import com.example.twende.models.Event;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -35,7 +37,14 @@ public class SavedEventListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_events);
         ButterKnife.bind(this);
 
-        mEventReference = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_EVENTS);
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        String uid = user.getUid();
+
+        mEventReference = FirebaseDatabase
+                .getInstance()
+                .getReference(Constants.FIREBASE_CHILD_EVENTS)
+                .child(uid);
+
         setUpFirebaseAdapter();
     }
 
