@@ -14,6 +14,7 @@ public class Event {
     private String currency;
 //    private String mTimeZone;
 private String pushId;
+private String index;
 
     public Event() {}
 
@@ -25,6 +26,7 @@ private String pushId;
         this.status = status;
         this.currency = currency;
 //        this.mTimeZone = timezone;
+        this.index = "not specified";
 
     }
 
@@ -55,5 +57,9 @@ private String pushId;
     public void setPushId(String pushId){
         this.pushId = pushId;
     }
+
+    public String getIndex() {return index;}
+
+    public void setIndex(String index) {this.index = index;}
 
 }
