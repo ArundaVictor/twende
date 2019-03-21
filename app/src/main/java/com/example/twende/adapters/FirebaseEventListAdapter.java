@@ -1,6 +1,7 @@
 package com.example.twende.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -10,6 +11,7 @@ import android.view.ViewGroup;
 
 import com.example.twende.R;
 import com.example.twende.models.Event;
+import com.example.twende.ui.EventDetailActivity;
 import com.example.twende.util.ItemTouchHelperAdapter;
 import com.example.twende.util.OnStartDragListener;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -20,11 +22,18 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.Query;
 
+import org.parceler.Parcels;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+
 public class FirebaseEventListAdapter extends FirebaseRecyclerAdapter<Event, FirebaseEventViewHolder> implements ItemTouchHelperAdapter {
     private DatabaseReference mRef;
     private OnStartDragListener mOnStartDragListener;
     private Context mContext;
     private ChildEventListener mChildEventListener;
+    private ArrayList<Event> mEvent = new ArrayList<>();
 
     public FirebaseEventListAdapter(FirebaseRecyclerOptions<Event> options,
                                     Query ref,
@@ -63,6 +72,15 @@ public class FirebaseEventListAdapter extends FirebaseRecyclerAdapter<Event, Fir
         });
     }
 
+    private void setIndexInFirebase() {
+        for (Event event : mEvent) {
+            int index = mEvent.indexOf(event);
+            DatabaseReference ref = getRef(index);
+            event.setIndex(Integer.toString(index));
+            ref.setValue(event);
+        }
+    }
+
     @Override
     protected void onBindViewHolder(@NonNull final FirebaseEventViewHolder firebaseEventViewHolder, int position, @NonNull Event event) {
         firebaseEventViewHolder.bindEvent(event);
@@ -73,6 +91,16 @@ public class FirebaseEventListAdapter extends FirebaseRecyclerAdapter<Event, Fir
                     mOnStartDragListener.onStartDrag(firebaseEventViewHolder);
                 }
                 return false;
+            }
+        });
+
+        firebaseEventViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(mContext, EventDetailActivity.class);
+                intent.putExtra("position", firebaseEventViewHolder.getAdapterPosition());
+                intent.putExtra("events", Parcels.wrap(mEvent));
+                mContext.startActivity(intent);
             }
         });
     }
@@ -86,12 +114,21 @@ public class FirebaseEventListAdapter extends FirebaseRecyclerAdapter<Event, Fir
 
     @Override
     public boolean onItemMove(int fromPosition, int toPosition) {
+        //Collections.swap(mEvent, fromPosition, toPosition);
         notifyItemMoved(fromPosition, toPosition);
+        setIndexInFirebase();
         return false;
     }
 
     @Override
     public void onItemDismiss(int position) {
+       // mEvent.remove(position);
         getRef(position).removeValue();
+    }
+
+    @Override
+    public void stopListening(){
+        super.stopListening();
+        mRef.removeEventListener(mChildEventListener);
     }
 }
