@@ -3,6 +3,7 @@ package com.example.twende.adapters;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -11,6 +12,7 @@ import com.example.twende.Constants;
 import com.example.twende.R;
 import com.example.twende.models.Event;
 import com.example.twende.ui.EventDetailActivity;
+import com.example.twende.util.ItemTouchHelperViewHolder;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -23,7 +25,7 @@ import org.parceler.Parcels;
 
 import java.util.ArrayList;
 
-public class FirebaseEventViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+public class FirebaseEventViewHolder extends RecyclerView.ViewHolder implements ItemTouchHelperViewHolder {
 
     View mView;
     Context mContext;
@@ -33,7 +35,42 @@ public class FirebaseEventViewHolder extends RecyclerView.ViewHolder implements 
         super(itemView);
         mView = itemView;
         mContext = itemView.getContext();
-        itemView.setOnClickListener(this);
+        itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                final ArrayList<Event> events = new ArrayList<>();
+
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                String uid = user.getUid();
+                DatabaseReference ref = FirebaseDatabase.getInstance()
+                        .getReference(Constants.FIREBASE_CHILD_EVENTS)
+                        .child(uid);
+
+                ref.addListenerForSingleValueEvent(new ValueEventListener() {
+
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                            events.add(snapshot.getValue(Event.class));
+                        }
+
+                        int itemPosition = getLayoutPosition();
+
+                        Intent intent = new Intent(mContext, EventDetailActivity.class);
+                        intent.putExtra("position", itemPosition + "");
+                        intent.putExtra("events", Parcels.wrap(events));
+
+                        mContext.startActivity(intent);
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                    }
+                });
+
+            }
+        });
     }
 
     public void bindEvent(Event event) {
@@ -48,36 +85,16 @@ public class FirebaseEventViewHolder extends RecyclerView.ViewHolder implements 
     }
 
     @Override
-    public void onClick(View view) {
-        final ArrayList<Event> events = new ArrayList<>();
-
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        String uid = user.getUid();
-        DatabaseReference ref = FirebaseDatabase.getInstance()
-                .getReference(Constants.FIREBASE_CHILD_EVENTS)
-                .child(uid);
-
-        ref.addListenerForSingleValueEvent(new ValueEventListener() {
-
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    events.add(snapshot.getValue(Event.class));
-                }
-
-                int itemPosition = getLayoutPosition();
-
-                Intent intent = new Intent(mContext, EventDetailActivity.class);
-                intent.putExtra("position", itemPosition + "");
-                intent.putExtra("events", Parcels.wrap(events));
-
-                mContext.startActivity(intent);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-            }
-        });
+    public void onItemSelected() {
+        Log.d("Animation", "onItemSelected");
+        // we will add animations here
     }
+
+    @Override
+    public void onItemClear() {
+        Log.d("Animation", "onItemClear");
+        // we will add animations here
+    }
+
 
 }
