@@ -58,9 +58,9 @@ dependencies {
     implementation 'com.firebaseui:firebase-ui-database:3.3.1'
     implementation 'com.google.firebase:firebase-auth:16.0.1'
 
-    //espresso dependecies
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+//    //espresso dependecies
+//    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+//    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
     //butterknife dependecies
     implementation 'com.jakewharton:butterknife:8.8.1'
